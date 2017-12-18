@@ -12,28 +12,28 @@ tags:
 
 > Map，Filter 和 Reduce 三个函数能为函数式编程提供便利。我们会通过实例一个一个讨论并理解它们
 
-## **Map**
+## Map
 
 Map会将一个函数映射到一个输入列表的所有元素上。这是它的规范：
 **规范**:
 
-    map(function_to_apply, list_of_inputs)
+  map(function_to_apply, list_of_inputs)
 
 
 大多数时候，我们要把列表中所有元素一个个地传递给一个函数，并收集输出。比方说:
 
 
-  	items = [1, 2, 3, 4, 5]
-    squared = []
-    for i in items:
-            squared.append(i**2)
+	items = [1, 2, 3, 4, 5]
+  squared = []
+  for i in items:
+          squared.append(i**2)
 
 
 Map可以让我们用一种简单而漂亮得多的方式来实现。就是这样：
 
 
-    items = [1, 2, 3, 4, 5]
-    squared = list(map(lambda x: x**2, items))
+  items = [1, 2, 3, 4, 5]
+  squared = list(map(lambda x: x**2, items))
 
 
 大多数时候，我们使用匿名函数(lambdas)来配合map, 所以我在上面也是这么做的。 不仅用于一列表的输入， 我们甚至可以用于一列表的函数！
@@ -41,29 +41,27 @@ Map可以让我们用一种简单而漂亮得多的方式来实现。就是这�
 代码如下:
 
 
-    def multiply(x):
-            return (x*x)
-    def add(x):
-            return (x+x)
-    funcs = [multiply, add]
-    for i in range(5):
-        value = map(lambda x: x(i), funcs)
-        print(list(value))
+  def multiply(x):
+          return (x*x)
+  def add(x):
+          return (x+x)
+  funcs = [multiply, add]
+  for i in range(5):
+      value = map(lambda x: x(i), funcs)
+      print(list(value))
 
 
------
 
-Filter
--------
+## Filter
 
 顾名思义，filter过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表，符合要求即函数映射到该元素时返回值为True. 这里是一个简短的例子:
 
 
 
-    number_list = range(-5, 5)
-    less_than_zero = filter(lambda x: x < 0, number_list)
-    print(list(less_than_zero))
-    Output: [-5, -4, -3, -2, -1]
+  number_list = range(-5, 5)
+  less_than_zero = filter(lambda x: x < 0, number_list)
+  print(list(less_than_zero))
+  Output: [-5, -4, -3, -2, -1]
 
 
 这个filter类似于一个for循环，但它是一个内置函数，并且更快。
@@ -81,6 +79,6 @@ Filter
 现在我们来试试 reduce：
 
 
-    from functools import reduce
-    product = reduce( (lambda x, y: x * y), [1, 2, 3, 4] )
-    Output: 24
+  from functools import reduce
+  product = reduce( (lambda x, y: x * y), [1, 2, 3, 4] )
+  Output: 24
