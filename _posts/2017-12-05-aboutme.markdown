@@ -7,7 +7,7 @@ author:     "Dugreen"
 header-img: ""
 catalog: true
 tags:
-    - 生活
+    - 随笔
 ---
 
 
