@@ -3,9 +3,9 @@ title: Dugreen Blog
 SEOTitle: 杜金龙的博客 | Dugreen Blog
 header-img: img/home-bg.jpg
 email: 13114956717@163.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "杜金龙, Dugreen, 黄玄的博客, Dugreen Blog, 博客, 个人网站, 互联网, Web, python,后端"
-url: "https://huangxuan.me"              # your host, for absolute URL
+description: "滑板 编程 | 杜金龙,Web & Mobile Lover，Software Engineer | 这里是Dugreen的个人博客，与你一起发现更大的世界。"
+keyword: "杜金龙, Dugreen, 杜金龙的博客, Dugreen Blog, 博客, 个人网站, 互联网, Web, python,后端"
+# url: "https://huangxuan.me"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -92,5 +92,8 @@ friends: [
     # },{
         title: "云中布衣",
         href: "http://mryu.top/"
+    },{
+      title:'黄玄'
+      href:"https://huangxuan.me"
     }
 ]
