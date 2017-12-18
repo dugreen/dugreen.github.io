@@ -4,7 +4,7 @@ title:      "python容器(Collections)"
 subtitle:   ""
 date:       2017-12-08 12:00:00
 author:     "Dugreen"
-header-img: "img/artical-bgs/3sum-bg.png"
+header-img: ""
 catalog: true
 tags:
     - Python
