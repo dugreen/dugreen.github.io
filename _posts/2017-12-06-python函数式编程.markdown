@@ -4,7 +4,7 @@ title:      "python-函数式编程"
 subtitle:   ""
 date:       2017-12-06 12:00:00
 author:     "Dugreen"
-header-img: ""
+header-img: "img/artical-bgs/back1.png"
 catalog: true
 tags:
     - Python

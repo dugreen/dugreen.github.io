@@ -4,7 +4,7 @@ title:      "python对象变动"
 subtitle:   ""
 date:       2017-12-07 12:00:00
 author:     "Dugreen"
-header-img: ""
+header-img: "img/artical-bgs/back2.png"
 catalog: true
 tags:
     - Python
