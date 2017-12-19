@@ -82,7 +82,7 @@ db.stu.find({$where:function(){return this.age>20}})
 
 ### Limit方法与Skip方法
 
-#### Limit
+###### Limit
 
 方法limit()：用于读取指定数量的文档
 
@@ -96,7 +96,7 @@ db.集合名称.find().limit(NUMBER)  <br/>
 $ db.stu.find().limit(2)
 ```
 
-#### skip
+###### skip
 
 方法skip()：用于跳过指定数量的文档
 
@@ -109,7 +109,7 @@ db.集合名称.find().skip(NUMBER)  <br/>
 $ db.stu.find().skip(2)
 ```
 
-#### 一起使用
+###### 一起使用
 
 **方法limit()和skip()可以一起使用，不分先后顺序**
 
@@ -141,3 +141,52 @@ $ db.stu.find({},{name:1,gender:1})
 # 例2
 $ db.stu.find({},{_id:0,name:1,gender:1})
 ```
+
+### 排序
+
+方法sort()，用于对结果集进行排序
+
+db.集合名称.find().sort({字段:1,...})  <br/>
+参数1为升序排列  <br/>
+参数-1为降序排列  <br/>
+
+```
+# 例1：根据性别降序，再根据年龄升序
+$ db.stu.find().sort({gender:-1,age:1})
+```
+
+
+### 统计个数
+
+方法count()用于统计结果集中文档条数
+
+语法  <br/>
+db.集合名称.find({条件}).count() 也可以为 db.集合名称.count({条件})<br/>
+
+```
+# 例1：统计男生人数
+$ db.stu.find({gender:1}).count()
+# 例2：统计年龄大于20的男生人数
+$ db.stu.count({age:{$gt:20},gender:1})
+```
+
+
+### 消除重复
+
+方法distinct()对数据进行去重
+
+语法  <br/>
+db.集合名称.distinct('去重字段',{条件})  <br/>
+
+```
+# 例1:查找年龄大于18的性别（去重）
+$ db.stu.distinct('gender',{age:{$gt:18}})
+```
+
+### 总结
+
+1. 安装
+2. 数据库创建、删除
+3. 集合创建、删除
+4. 文档增加、修改、删除
+5. 文档查询：find(),limit(),skip(),投影,sort(),count(),distinct()
