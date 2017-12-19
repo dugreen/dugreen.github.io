@@ -70,24 +70,24 @@ tags:
 
 集合创建
 
-  $ db.createCollection(name, options)
-  # name是要创建的集合的名称
-  # options是一个文档，用于指定集合的配置
-  # 选项​​参数是可选的，所以只需要到指定的集合名称。
-  # 例1：不限制集合大小
-  # db.createCollection("stu")
-  # 例2：限制集合大小
-  # 参数capped：默认值为false表示不设置上限，值为true表示设置上限
-  # 参数size：当capped值为true时，需要指定此参数，表示上限大小，当文档达到上限时，会将之前的数据覆盖，单位为字节
-  # db.createCollection("sub", { capped : true, size : 10 } )
+  **$db.createCollection(name, options)**
+  name是要创建的集合的名称
+  options是一个文档，用于指定集合的配置
+  选项​​参数是可选的，所以只需要到指定的集合名称。
+  例1：不限制集合大小
+  **$db.createCollection("stu")**
+  例2：限制集合大小
+  参数capped：默认值为false表示不设置上限，值为true表示设置上限
+  参数size：当capped值为true时，需要指定此参数，表示上限大小，当文档达到上限时，会将之前的数据覆盖，单位为字节
+  **$db.createCollection("sub", { capped : true, size : 10 } )**
 
 查看当前数据库的集合
 
-  $ show collections
+  $show collections
 
 删除
 
-  $ db.集合名称.drop()
+  $db.集合名称.drop()
 
 ---------------
 
@@ -119,22 +119,22 @@ tags:
 
 ###### 插入
 
-  **$ db.集合名称.insert(document)**
+  **$db.集合名称.insert(document)**
   # 插入文档时，如果不指定_id参数，MongoDB会为文档分配一个唯一的ObjectId
   # 例1
-  **$ db.stu.insert({name:'gj',gender:1})**
+  **$db.stu.insert({name:'gj',gender:1})**
   # 例2
-  **$ s1={_id:'20160101',name:'hr'}
-  $ s1.gender=0
-  $ db.stu.insert(s1)**
+  **$s1={_id:'20160101',name:'hr'}
+  $s1.gender=0
+  $db.stu.insert(s1)**
 
 ######简单查询
 
-  **$ db.集合名称.find()**
+  **$db.集合名称.find()**
 
 ###### 更新
 
-  **$ db.集合名称.update(
+  **$db.集合名称.update(
      <query>,
      <update>,
      {multi: <boolean>}
@@ -143,26 +143,26 @@ tags:
   # 参数update:更新操作符，类似sql语句update中set部分
   # 参数multi:可选，默认是false，表示只更新找到的第一条记录，值为true表示把满足条件的文档全部更新
   # 例3：全文档更新
-  **$ db.stu.update({name:'hr'},{name:'mnc'})**
+  **$db.stu.update({name:'hr'},{name:'mnc'})**
   # 例4：指定属性更新，通过操作符$set
-  **$ db.stu.insert({name:'hr',gender:0})
-  $ db.stu.update({name:'hr'},{$set:{name:'hys'}})**
+  **$db.stu.insert({name:'hr',gender:0})
+  $db.stu.update({name:'hr'},{$set:{name:'hys'}})**
   # 例5：修改多条匹配到的数据
-  **$ db.stu.update({},{$set:{gender:0}},{multi:true})**
+  **$db.stu.update({},{$set:{gender:0}},{multi:true})**
 
 ######保存
 
-  **$ db.集合名称.save(document)**
+  **$db.集合名称.save(document)**
   # 如果文档的_id已经存在则修改，如果文档的_id不存在则添加
 
   # 例6
-  **$ db.stu.save({_id:'20160102','name':'yk',gender:1})**
+  **$db.stu.save({_id:'20160102','name':'yk',gender:1})**
   # 例7
-  **$ db.stu.save({_id:'20160102','name':'wyk'})**
+  **$db.stu.save({_id:'20160102','name':'wyk'})**
 
 ###### 删除
 
-  **$ db.集合名称.remove(
+  **$db.集合名称.remove(
      <query>,
      {
        justOne: <boolean>
@@ -171,26 +171,26 @@ tags:
   # 参数query:可选，删除的文档的条件
   # 参数justOne:可选，如果设为true或1，则只删除一条，默认false，表示删除多条
   # 例8：只删除匹配到的第一条
-  **$ db.stu.remove({gender:0},{justOne:true})**
+  **$db.stu.remove({gender:0},{justOne:true})**
   # 例9：全部删除
-  **$ db.stu.remove({})**
+  **$db.stu.remove({})**
 
 ###### 关于size的示例
   # 例10
   # 创建集合
-  **$ db.createCollection('sub',{capped:true,size:10})**
+  **$db.createCollection('sub',{capped:true,size:10})**
   # 插入第一条数据库查询
-  **$ db.sub.insert({title:'linux',count:10})
-  $ db.sub.find()**
+  **$db.sub.insert({title:'linux',count:10})
+  $db.sub.find()**
   # 插入第二条数据库查询
-  **$ db.sub.insert({title:'web',count:15})
-  db.sub.find()**
+  **$db.sub.insert({title:'web',count:15})
+  $db.sub.find()**
   # 插入第三条数据库查询
-  **$ db.sub.insert({title:'sql',count:8})
-  $ db.sub.find()**
+  **$db.sub.insert({title:'sql',count:8})
+  $db.sub.find()**
   # 插入第四条数据库查询
-  **$ db.sub.insert({title:'django',count:12})
-  $ db.sub.find()**
+  **$db.sub.insert({title:'django',count:12})
+  $db.sub.find()**
   # 插入第五条数据库查询
-  **$ db.sub.insert({title:'python',count:14})
-  $ db.sub.find()**
+  **$db.sub.insert({title:'python',count:14})
+  $db.sub.find()**
