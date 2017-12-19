@@ -30,10 +30,9 @@ $ db.stu.find().sort({gender:-1,age:1})
 
 方法count()用于统计结果集中文档条数
 
-  语法
-  db.集合名称.find({条件}).count()
-  也可以与为
-  db.集合名称.count({条件})
+语法
+
+db.集合名称.find({条件}).count() 也可以为 db.集合名称.count({条件})
 
 ```
 # 例1：统计男生人数
@@ -47,8 +46,9 @@ $ db.stu.count({age:{$gt:20},gender:1})
 
 方法distinct()对数据进行去重
 
-  语法
-  db.集合名称.distinct('去重字段',{条件})
+语法
+
+db.集合名称.distinct('去重字段',{条件})
 
 ```
 # 例1:查找年龄大于18的性别（去重）
