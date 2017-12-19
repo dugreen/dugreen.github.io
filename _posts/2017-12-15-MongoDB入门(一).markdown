@@ -43,6 +43,8 @@ $ tar -zxvf mongodb-linux-x86_64-ubuntu1604-3.4.0.tgz
 $ sudo mv -r mongodb-linux-x86_64-ubuntu1604-3.4.0/ /usr/local/mongodb
 # 将可执行文件添加到PATH路径中
 $ export PATH=/usr/local/mongodb/bin:$PATH
+# 启动数据库服务(自行更改目标数据目录)
+$ mongod --dbpath /home/dugeen/pyDemo/db
 ```
 
 ----------------
@@ -134,7 +136,7 @@ $ s1.gender=0
 $ db.stu.insert(s1)
 ```
 
-######简单查询
+###### 简单查询
 
   **$ db.集合名称.find()**
 
@@ -158,7 +160,7 @@ $ db.stu.update({name:'hr'},{$set:{name:'hys'}})
 $ db.stu.update({},{$set:{gender:0}},{multi:true})
 ```
 
-######保存
+###### 保存
 
 ```
 $ db.集合名称.save(document)
