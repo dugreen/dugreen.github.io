@@ -213,7 +213,6 @@ db.inventory.aggregate([{
 ```
 
 * 构造数据
-
 ```
 db.t3.insert([
 { "_id" : 1, "item" : "a", "size": [ "S", "M", "L"] },
