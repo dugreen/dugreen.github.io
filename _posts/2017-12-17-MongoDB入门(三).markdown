@@ -14,7 +14,7 @@ tags:
 
 # 高级操作
 
->讲解关于mongodb的高级操作，包括聚合、主从复制、分片、备份与恢复、MR完成python与mongodb的交互
+>讲解关于mongodb的高级操作，包括聚合、主从复制、分片、备份与恢复、MR、完成python与mongodb的交互
 
 ## 聚合 aggregate
 
@@ -154,7 +154,7 @@ db.stu.aggregate([
 
 ```
 # 例1：查询学生信息，按年龄升序
-b.stu.aggregate([{$sort:{age:1}}])
+db.stu.aggregate([{$sort:{age:1}}])
 # 例2：查询男生、女生人数，按人数降序
 db.stu.aggregate([
     {$group:{_id:'$gender',counter:{$sum:1}}},
