@@ -18,8 +18,8 @@ tags:
 
 * F1 Google浏览器帮助中心
 * F12 打开Chrome控制台 Ctrl+J
-* 进入“下载内容”页面 Ctrl+H 
-* 查看“历史记录”页面 Ctrl+D 
+* 进入“下载内容”页面 Ctrl+D 
+* 查看“历史记录”页面 Ctrl+H 
 * 将此页加入书签 Ctrl+F 
 * 打开/关闭 搜索框（搜索页面内的文字） 
 * Ctrl+P 打开打印窗口 Ctrl+T 新建标签页 
