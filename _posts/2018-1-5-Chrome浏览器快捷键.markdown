@@ -32,8 +32,8 @@ tags:
 * Ctrl+Shift+N 新建一个隐身模式窗口 
 * **Ctrl+Tab 从左到右，标签循环浏览** 
 * **Ctrl+Shift+Tab 从右到左，标签循环浏览** 
-* **Ctrl+1-8 分别指向第1、2、3…8标签 **
-* **Ctrl+9 跳转到最后一个标签 **
+* **Ctrl+1-8 分别指向第1、2、3...标签**
+* **Ctrl+9 跳转到最后一个标签**
 * Ctrl+Shift+Del 打开“清除浏览数据”窗口 
 * Ctrl+Shift+B 显示/隐藏书签栏 
 * Shift+Esc 开打Chrome任务管理器 
