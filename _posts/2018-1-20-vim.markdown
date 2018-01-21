@@ -96,9 +96,8 @@ Bundle "klen/python-mode"
 
 进入vim的命令模式，输入BundleInstall命令下载
 
-![](https://github.com/dugreen/dugreen.github.io/img/artical-includes/vim2.png)
-
-![](https://github.com/dugreen/dugreen.github.io/img/artical-includes/vim1.png)
+![](img/artical-includes/vim2.png) 
+![](img/artical-includes/vim1.png)
 
 
 #### 通过apt安装YouCompleteMe(ubuntu系统,别的系统没有尝试过)
