@@ -1,0 +1,111 @@
+---
+layout:     post
+title:      "vim个性化配置"
+subtitle:   "Ubuntu安装YouCompleteMe这个插件的正确姿势"
+date:       2018-1-20 12:00:00
+author:     "Dugreen"
+header-img: "img/artical-bgs/back6.jpg"
+catalog: true
+tags:
+     - vim
+     - linux
+---
+
+> 由于昨天晚上一个fdisk的相关操作，导致我的系统引导文件丢失，然后尝试诸多解决方案后放弃折腾重装了系统。接下来就是安装各种软件（git,vim,atom,坚果云,网易云音乐,搜狗拼音...）,在配置vim的过程中通过vunble插件管理器安装管理插件。
+
+**配置vim大概有一下几个步骤**
+
+1. 安装插件管理工具vunble
+2. 创建.vimrc文件，进行vim个性化配置
+3. 创建.vimrc.bundles 文件，单独对插件进行管理（其中的配置亦可配置在.vimrc这个文件中，单独区分便于管理）
+4. 进入vim进行插件下载
+
+#### 安装vundle
+
+```
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+```
+
+#### .vimrc文件的配置
+
+首先进行插件管理文件的加载，如果不通过单独文件对插件进行管理，请忽略。
+
+```
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+```
+
+写代码自动缩进的配置
+
+```
+:filetype indent on
+set ci
+set noet
+set sw=4
+```
+
+#### .vimrc.bundles文件的配置
+
+添加vundle支持,并将需要安装的插件写在这个文件中
+
+```
+" 添加vundle支持
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" 并将需要安装的插件写在这个文件中
+Bundle 'christoomey/vim-run-interactive'
+" Bundle 'Valloric/YouCompleteMe' # Ubuntu系统通过vundle安装这个插件会报错
+Bundle 'croaky/vim-colors-github'
+Bundle 'danro/rename.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'pbrisbin/vim-mkdir'
+Bundle 'scrooloose/syntastic'
+Bundle 'slim-template/vim-slim'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/ctags.vim'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/tComment'
+Bundle "mattn/emmet-vim"
+Bundle "scrooloose/nerdtree"
+Bundle "Lokaltog/vim-powerline"
+Bundle "godlygeek/tabular"
+Bundle "msanders/snipmate.vim"
+Bundle "jelera/vim-javascript-syntax"
+Bundle "altercation/vim-colors-solarized"
+Bundle "othree/html5.vim"
+Bundle "xsbeats/vim-blade"
+Bundle "Raimondi/delimitMate"
+Bundle "groenewege/vim-less"
+Bundle "Lokaltog/vim-easymotion"
+Bundle "tomasr/molokai"
+Bundle "klen/python-mode"
+```
+
+#### 进入vim下载插件
+
+进入vim的命令模式，输入BundleInstall命令下载
+
+![](https://github.com/dugreen/dugreen.github.io/img/artical-includes/vim2.png)
+
+![](https://github.com/dugreen/dugreen.github.io/img/artical-includes/vim1.png)
+
+
+#### 通过apt安装YouCompleteMe(ubuntu系统,别的系统没有尝试过)
+
+```
+$ sudo apt-get install vim-youcompleteme
+$ vim-addons install youcompleteme
+```
+
+
