@@ -14,7 +14,10 @@ tags:
 
 ## linux平台上安装Go
 
+
 1.首先到Go的官网下载适合自己硬件平台的压缩包[点我下载](https://golang.google.cn/dl/)
+
+
 2.将下载好的压缩包文件(go$VERSION.$OS-$ARCH.tar.gz)解压到 /usr/local 目录下(需root权限)
 
 ```
