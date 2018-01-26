@@ -14,20 +14,20 @@ tags:
 
 ## linux平台上安装Go
 
-1. 首先到Go的官网下载适合自己硬件平台的压缩包[点我下载](https://golang.google.cn/dl/)
-2. 将下载好的压缩包文件(go$VERSION.$OS-$ARCH.tar.gz)解压到 /usr/local 目录下(需root权限)
+1.首先到Go的官网下载适合自己硬件平台的压缩包[点我下载](https://golang.google.cn/dl/)
+2.将下载好的压缩包文件(go$VERSION.$OS-$ARCH.tar.gz)解压到 /usr/local 目录下(需root权限)
 
 ```
 tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
 
 ```
-3. 添加 /usr/local/go/bin 到 PATH 环境变量,可以选择添加到/etc/profile 文件下，或者添加到 $HOME/.profile文件下。这两者之间的区别就是前者作用于全部的用户，后者只作用于当前用户。
+3.添加 /usr/local/go/bin 到 PATH 环境变量,可以选择添加到/etc/profile 文件下，或者添加到 $HOME/.profile文件下。这两者之间的区别就是前者作用于全部的用户，后者只作用于当前用户。
 
 ```
 # 把我加进去-.-
 export PATH=$PATH:/usr/local/go/bin
 ```
-4. 安装Go在用户目录下的某个位置,我这里是 $HOME/gopath ,这里的安装其实是配置自己Go的workspace的位置(感觉怪怪的感觉,其实编写Go的程序需要一个单独的工作区，将该工作区进行一系列的配置(其实就是建几个目录),然后将工作区的路径进行配置)。
+4.安装Go在用户目录下的某个位置,我这里是 $HOME/gopath ,这里的安装其实是配置自己Go的workspace的位置(感觉怪怪的感觉,其实编写Go的程序需要一个单独的工作区，将该工作区进行一系列的配置(其实就是建几个目录),然后将工作区的路径进行配置)。
 
 ```
 export GOROOT=$HOME/gopath
