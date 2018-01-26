@@ -1,0 +1,105 @@
+---
+layout:     post
+title:      "Go安装与入门"
+subtitle:   ""
+date:       2018-1-25 12:00:00
+author:     "Dugreen"
+header-img: "img/artical-bgs/back4.jpg"
+catalog: true
+tags:
+     - Go
+---
+
+> 今天逛知乎突然看到一个专栏文章《Hello中国，Go官网回归中国》，最近传知乎的部分业务开始转向Go，开始对这门语言产生了一丝兴趣，然后点进了Go官网，看到全英文官方文档我内心是恐惧的(目前英语水平太菜` _ `)。决心要提高英语水平的我，不不不，决心要提高编程能力的我决定通过这个寒假来攻克它(english -.-)。
+
+## linux平台上安装Go
+
+1. 首先到Go的官网下载适合自己硬件平台的压缩包[点我下载](https://golang.google.cn/dl/)
+2. 将下载好的压缩包文件(go$VERSION.$OS-$ARCH.tar.gz)解压到 /usr/local 目录下(需root权限)
+
+```
+tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+
+```
+3. 添加 /usr/local/go/bin 到 PATH 环境变量,可以选择添加到/etc/profile 文件下，或者添加到 $HOME/.profile文件下。这两者之间的区别就是前者作用于全部的用户，后者只作用于当前用户。
+
+```
+# 把我加进去-.-
+export PATH=$PATH:/usr/local/go/bin
+```
+4. 安装Go在用户目录下的某个位置,我这里是 $HOME/gopath ,这里的安装其实是配置自己Go的workspace的位置(感觉怪怪的感觉,其实编写Go的程序需要一个单独的工作区，将该工作区进行一系列的配置(其实就是建几个目录),然后将工作区的路径进行配置)。
+
+```
+export GOROOT=$HOME/gopath
+export PATH=$PATH:$GOROOT/bin
+```
+
+ok,到这个时候所有的下载,安装,配置操作都结束了。到自己的终端中输入 go ，如果你看到一堆输出，那么就表示没有问题了。
+
+接下来就带着看到这里的小伙伴，展示如何运行一个helloworld程序。
+
+首先要解决上面那个拗口的工作区(workspace)的问题，首先进入该工作区的目录下，新建bin pkg src 这三个目录。
+
+要编译并运行一个简单的程序，首先需要选择一个源码包路径来存放这个程序(我这里使用的是 github.com/dugreen/hello )创建这个目录在src下。
+
+```
+$ mkdir -p $GOPATH/src/github.com/user/hello
+```
+
+接下来创建一个叫做 hello.go 的文件在上面刚创建好的目录下，然后编写下面的代码。
+
+```
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Printf("Hello, world.\n")
+}
+
+```
+
+接下来使用 go 来编译并运行这个小程序：
+
+```
+$ go install github.com/user/hello
+# 其实如果你在当前该程序文件的目录下你可以这样：
+$ go install
+
+# 执行可执行文件
+$ $GOPATH/bin/hello
+```
+
+看的全英文的官网，那个别扭啊啊啊啊！！！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
