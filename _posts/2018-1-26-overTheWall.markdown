@@ -79,7 +79,7 @@ $ tar -xvf tor-browser-linux64-7.5_en-US.tar
 
 之后的操作就是配置网桥。选择meek-amazon。然后就没了。。。我记得我去年在windows上有一堆窗口弹出来要配置的，可能是Tor优化了吧！
 
-![](img/artical-includes/tor.png)
+![](/img/artical-includes/tor.png)
 
 ### 不能叫做翻墙的操作
 
