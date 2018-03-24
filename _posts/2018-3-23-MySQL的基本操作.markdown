@@ -15,7 +15,7 @@ tags:
 ## 数据库常用操作
 
 ```
-# 查看数据库表
+# 查看数据库
 > show databases;
 
 # 使用某个具体的数据库
@@ -49,7 +49,7 @@ $ mysql -u root -p drop databaseName
 )engine=InnoDB default charset=utf8;
 
 # 查看表如何创建
-> show create table emp;
+> show create table table_name;
 ```
 
 数据操作

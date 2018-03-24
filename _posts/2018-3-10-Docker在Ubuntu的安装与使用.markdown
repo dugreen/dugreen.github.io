@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Dockeri在Ubuntu平台的安装与使用"
+title:      "Docker在Ubuntu平台的安装与使用"
 subtitle:   ""
 date:       2018-3-10 12:00:00
 author:     "Dugreen"
