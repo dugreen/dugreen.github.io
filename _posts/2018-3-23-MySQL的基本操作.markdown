@@ -1,0 +1,83 @@
+---
+layout:     post
+title:      "MySQL基本操作总结"
+subtitle:   ""
+date:       2018-3-23 12:00:00
+author:     "Dugreen"
+header-img: "img/artical-bgs/back1.jpg"
+catalog: true
+tags:
+     - MySQL
+---
+
+> 很久之前学习过MySQL的基本操作，后来由于数据库的东西接触的比较少很多东西都忘了。这两天熟悉了一遍MySQL的常见操作，总结了一些。
+
+## 数据库常用操作
+
+```
+# 查看数据库表
+> show databases;
+
+# 使用某个具体的数据库
+> use databaseName;
+
+# 创建数据库
+$ mysql -u root -p create databaseName
+
+# 删除数据库
+$ mysql -u root -p drop databaseName
+```
+
+## 数据库表的操作
+
+表操作
+
+```
+# 查看数据库中的表
+> show tables;
+
+# 删除数据库中的表
+> drop table tableName;
+
+# 创建数据库中的表
+> create table table_name (
+	`table_id` int unsigned auto_increment,
+	`table_property` varchar(20) nut null,
+	`table_foreign` int,
+	primary key(`table_id`),
+	foreign key(table_foreign) references tableName(tableId)	
+)engine=InnoDB default charset=utf8;
+
+# 查看表如何创建
+> show create table emp;
+```
+
+数据操作
+
+```
+# 插入数据
+> insert into tableName
+-> (id,property)
+-> values
+-> (1314,"属性");
+
+# 查询数据
+> SELECT column_name,column_name FROM table_name 
+-> [WHERE Clause] [LIMIT N][ OFFSET M]
+
+examples:
+> select * from table_name; # 从table_name这个表中读取全部数据
+
+# 修改数据
+> UPDATE table_name SET field1=new-value1, field2=new-value2 
+-> [WHERE Clause]
+
+examples:
+> update students set stu_name=NULL where stu_name="dugreen";
+
+# 删除数据
+> DELETE FROM table_name [WHERE Clause]
+
+examples:
+delete from students where stu_name="dugreen"
+```
