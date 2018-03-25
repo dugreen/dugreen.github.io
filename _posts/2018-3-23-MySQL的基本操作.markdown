@@ -22,10 +22,10 @@ tags:
 > use databaseName;
 
 # 创建数据库
-$ mysql -u root -p create databaseName
-
+> create database databaseName;
+ 
 # 删除数据库
-$ mysql -u root -p drop databaseName
+> drop database databaseName;
 ```
 
 ## 数据库表的操作
