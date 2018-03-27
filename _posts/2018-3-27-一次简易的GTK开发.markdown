@@ -1,0 +1,320 @@
+---
+layout:     post
+title:      "一次简易的GTK开发"
+subtitle:   "非GTK入门教程,仅仅一个基于GTK开发的实例"
+date:       2018-3-27 12:00:00
+author:     "Dugreen"
+header-img: "img/artical-bgs/back6.jpg"
+catalog: true
+tags:
+     - linux
+     - GTK
+---
+
+## GTK介绍
+
+> GTK+（GIMP Toolkit)是一套源码以LGPL许可协议分发、跨平台的图形工具包。最初是为GIMP写的，已成为一个功能强大、设计灵活的一个通用图形库，是GNU/Linux下开发图形界面的应用程序的主流开发工具之一。并且，GTK+也有Windows版本和Mac OS X版。
+
+GTK是我接触的第一个运行在PC上的图形界面开发软件的开发工具包。接触的原因是帮学姐做一个对话框界面实现纯数学公式的运算。为什么选择GTK，有以下几个原因：
+
+* 学姐要求必须c++或c来实现
+* 自己电脑的系统Ubuntu（Windows系统的图形开发包不可用）
+* 在CSDN找到一个[简易的教程](https://blog.csdn.net/lianghe_work/article/details/47041337)
+* 虽然自己当初准备使用Qt开发，甚至开发环境都已经配好了，但是我偶然看到了上述的教程就放弃了使用Qt的想法
+
+## 程序设计图
+
+![学姐的设计手稿](/img/artical-includes/design.jpg)
+
+## c++核心程序实现
+
+```
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	// R X G B -> input[4]
+	double R = 1.2;
+	double X = 1.6;
+	double G = 0;
+	double B = 0.2;
+
+	// y11=y22 -> temp[0][0] temp[0][1]
+	// y12     -> temp[1][0] temp[1][1]
+	double temp[2][2];
+	temp[0][0] = G / 2;
+	temp[0][1] = B / 2;
+	temp[1][0] = R / (R*R + X*X);
+        temp[1][1] = -1*(X / (R*R + X*X));
+
+
+	// Y11 -> a[2]
+	double a[2];
+        a[0] = temp[0][0] + temp[1][0];
+	a[1] = temp[0][1] + temp[1][1];
+	// Y12 -> b[2]
+	double b[2];
+	b[0] = -1*temp[1][0];
+	b[1] = -1*temp[1][1];
+	// Y21 -> c[2] 
+	double c[2];
+	c[0] = -1*temp[1][0];
+	c[1] = -1*temp[1][1];
+	// Y22 -> d[2]
+	double d[2];
+	d[0] = temp[0][0] + temp[1][0];
+	d[1] = temp[0][1] + temp[1][1];
+
+	cout<<"输出矩阵是:"<<endl;
+	cout<<a[0]<<a[1]<<"j"<<"  "<<b[0]<<b[1]<<"j"<<endl;
+	cout<<c[0]<<c[1]<<"j"<<"  "<<d[0]<<d[1]<<"j"<<endl;
+
+	return 0;
+}
+
+```
+
+## 对接图形界面
+
+由于这篇文章并不介绍GTK开发的基础学习，如果有这方面需求的可以跳转链接到[简易的GTK教程](https://blog.csdn.net/lianghe_work/article/details/47041337),这篇文章是基于具体开发任务的实战。记录分享下来。
+
+## 运行截图
+
+![运行图](/img/artical-includes/math.png)
+
+## 图形界面开发程序
+
+```
+#include <iostream>
+#include <gtk/gtk.h>  
+#include <string.h>
+#include <vector>
+#include <sstream>
+
+
+
+using namespace std;
+
+std::vector<string> inputData; //存储输入框数据
+std::vector<string> outputData; //存储输出数据
+
+
+//函数声明
+const char* splitStr_one(int i);
+const char* splitStr_two(int i);
+string doubleToStr(double d);
+double *math();
+void out(GtkWidget *widget, gpointer output);
+void getResult(GtkWidget *widget, gpointer output);
+void entry_callback(GtkWidget *widget, gpointer entry);
+
+
+int main(int argc,char *argv[])  
+{  
+        //gtk环境初始化  
+        gtk_init(&argc, &argv);
+        //创建一个窗口  
+        GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        //设置窗口大小
+        gtk_widget_set_size_request(window, 1200, 800);
+        //设置窗口关闭事件
+        g_signal_connect(window,"destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+  
+        //创建一个固定布局容器fixed  
+        GtkWidget *fixed = gtk_fixed_new();  
+        //将fixed添加到window中  
+        gtk_container_add(GTK_CONTAINER(window), fixed);  
+  
+  
+        //创建四个标签  
+        GtkWidget *label_one = gtk_label_new("R:");
+        GtkWidget *label_two = gtk_label_new("X:");  
+        GtkWidget *label_three = gtk_label_new("G:");  
+        GtkWidget *label_four = gtk_label_new("B:");  
+	//创建一个四个输入框
+        GtkWidget *entry_one = gtk_entry_new();
+        GtkWidget *entry_two = gtk_entry_new();
+        GtkWidget *entry_three = gtk_entry_new();
+        GtkWidget *entry_four = gtk_entry_new();
+	//创建一个按钮
+        GtkWidget *button = gtk_button_new_with_label("click");
+        //创建八个显示view
+        GtkWidget *output1 = gtk_label_new("");
+        GtkWidget *output2 = gtk_label_new("");
+        GtkWidget *output3 = gtk_label_new("");
+        GtkWidget *output4 = gtk_label_new("");
+        GtkWidget *output5 = gtk_label_new("");
+        GtkWidget *output6 = gtk_label_new("");
+        GtkWidget *output7 = gtk_label_new("");
+        GtkWidget *output8 = gtk_label_new("");
+
+
+
+        //将四个标签添加到固定布局容器中并其在窗口中设置固定位置
+        gtk_fixed_put(GTK_FIXED(fixed), label_one, 30,100);  
+        gtk_fixed_put(GTK_FIXED(fixed), label_two, 30,200);  
+        gtk_fixed_put(GTK_FIXED(fixed), label_three, 30,300);  
+        gtk_fixed_put(GTK_FIXED(fixed), label_four, 30,400);         
+        //将按钮添加到固定容器中  
+        gtk_fixed_put(GTK_FIXED(fixed), button, 500,600);
+        //将输入框添加到固定容器
+        gtk_fixed_put(GTK_FIXED(fixed), entry_one, 100, 100);  
+        gtk_fixed_put(GTK_FIXED(fixed), entry_two, 100, 200);  
+        gtk_fixed_put(GTK_FIXED(fixed), entry_three, 100, 300);  
+        gtk_fixed_put(GTK_FIXED(fixed), entry_four, 100, 400);         
+        //将八个输出添加到固定容器中
+        gtk_fixed_put(GTK_FIXED(fixed), output1, 700,200);  
+        gtk_fixed_put(GTK_FIXED(fixed), output2, 750,200);  
+        gtk_fixed_put(GTK_FIXED(fixed), output3, 900,200);  
+        gtk_fixed_put(GTK_FIXED(fixed), output4, 950,200);  
+        gtk_fixed_put(GTK_FIXED(fixed), output5, 700,400);  
+        gtk_fixed_put(GTK_FIXED(fixed), output6, 750,400);  
+        gtk_fixed_put(GTK_FIXED(fixed), output7, 900,400);  
+        gtk_fixed_put(GTK_FIXED(fixed), output8, 950,400);  
+      
+       
+        //设置button2的大小  
+        gtk_widget_set_size_request(button,100, 50); 
+        //设置输出框大小
+        gtk_widget_set_size_request(entry_one,300, 50);  
+        gtk_widget_set_size_request(entry_two,300, 50);  
+        gtk_widget_set_size_request(entry_three,300, 50);  
+        gtk_widget_set_size_request(entry_four,300, 50);
+        //设置标签大小
+        gtk_widget_set_size_request(label_one,50, 50);  
+        gtk_widget_set_size_request(label_two,50, 50);  
+        gtk_widget_set_size_request(label_three,50, 50);  
+        gtk_widget_set_size_request(label_four,50, 50);
+        //设置输出大小
+        gtk_widget_set_size_request(output1,50,50);  
+        gtk_widget_set_size_request(output2,50,50);  
+        gtk_widget_set_size_request(output3,50,50);  
+        gtk_widget_set_size_request(output4,50,50);  
+        gtk_widget_set_size_request(output5,50,50);  
+        gtk_widget_set_size_request(output6,50,50);  
+        gtk_widget_set_size_request(output7,50,50); 
+        gtk_widget_set_size_request(output8,50,50);  
+
+        //添加按钮点击事件
+        g_signal_connect(button, "clicked",G_CALLBACK(entry_callback), entry_one);//获取文本框一的数据
+        g_signal_connect(button, "clicked",G_CALLBACK(entry_callback), entry_two);//获取文本框二的数据
+        g_signal_connect(button, "clicked",G_CALLBACK(entry_callback), entry_three);//获取文本框三的数据
+        g_signal_connect(button, "clicked",G_CALLBACK(entry_callback), entry_four);//获取文本框四的数据
+        g_signal_connect(button, "clicked",G_CALLBACK(getResult),output1);
+	g_signal_connect(button, "clicked",G_CALLBACK(out), output2);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output3);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output4);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output5);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output6);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output7);
+        g_signal_connect(button, "clicked",G_CALLBACK(out), output8);
+
+
+        //显示所有窗口  
+        gtk_widget_show_all(window);  
+  
+        //主事件循环  
+        gtk_main();
+        return 0;  
+}  
+
+
+double *math(){
+        // R X G B -> input[4]
+        double R,X,G,B;
+
+        //v存储的输入框内容转化为double类型
+        stringstream ss,dd,ff,gg;
+        ss << inputData[0];
+        ss >> R;
+        dd << inputData[1];
+        dd >> X;
+        ff << inputData[2];
+        ff >> G;
+        gg << inputData[3];
+        gg >> B;
+
+        // y11=y22 -> temp[0][0] temp[0][1]
+        // y12     -> temp[1][0] temp[1][1]
+        double temp[2][2];
+        temp[0][0] = G / 2;
+        temp[0][1] = B / 2;
+        temp[1][0] = R / (R*R + X*X);
+        temp[1][1] = -1*(X / (R*R + X*X));
+
+        double *result = new double[8];
+        result[0] = temp[0][0] + temp[1][0];
+        result[1] = temp[0][1] + temp[1][1];
+        
+        result[2] = -1*temp[1][0];
+        result[3] = -1*temp[1][1];
+        
+        result[4] = -1*temp[1][0];
+        result[5] = -1*temp[1][1];
+        
+        result[6] = temp[0][0] + temp[1][0];
+        result[7] = temp[0][1] + temp[1][1];
+
+        return result;
+}
+
+string doubleToStr(double d){
+        string s;
+        stringstream ss;
+        ss << d;
+        ss >> s;
+        return s;
+}
+
+
+void out(GtkWidget *widget, gpointer output)
+{
+        string str = "emm";
+        int tempInt = inputData.size();
+        if (tempInt%2 == 0){
+                const char* tempStr = (outputData[tempInt-3]+" j").data();
+                inputData.push_back(str);
+                gtk_label_set_text(GTK_LABEL(output), tempStr);  
+        }else{
+                const char* tempStr = outputData[tempInt-3].data();
+                inputData.push_back(str);          
+                gtk_label_set_text(GTK_LABEL(output), tempStr);  
+        }
+        return;
+}
+void getResult(GtkWidget *widget, gpointer output)
+{
+        double *result;
+        result = math();
+        for(int i=0;i<8;i++)
+                outputData.push_back(doubleToStr(result[i]));
+        const char* temp = outputData[0].data();
+        gtk_label_set_text(GTK_LABEL(output), temp);  
+        return;
+}
+/*
+*获取文本框数据的函数
+*/
+void entry_callback(GtkWidget *widget, gpointer entry)
+{
+        const gchar *entry_text;
+        //获取文本内容
+        entry_text = gtk_entry_get_text(GTK_ENTRY(entry));
+        inputData.push_back(entry_text);
+        return;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
