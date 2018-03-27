@@ -24,7 +24,7 @@ GTK是我接触的第一个运行在PC上的图形界面开发软件的开发工
 
 ## 程序设计图
 
-![学姐的设计手稿](/img/artical-includes/design.jpg)
+![](/img/artical-includes/design.jpg)
 
 ## c++核心程序实现
 
@@ -81,7 +81,7 @@ int main(){
 
 ## 运行截图
 
-![运行图](/img/artical-includes/math.png)
+![](/img/artical-includes/math.png)
 
 ## 图形界面开发程序
 
