@@ -42,7 +42,7 @@ tags:
 # 创建数据库中的表
 > create table table_name (
 	`table_id` int unsigned auto_increment,
-	`table_property` varchar(20) nut null,
+	`table_property` varchar(20) not null,
 	`table_foreign` int,
 	primary key(`table_id`),
 	foreign key(table_foreign) references tableName(tableId)	
